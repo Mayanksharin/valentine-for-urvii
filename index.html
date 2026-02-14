@@ -1,200 +1,106 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For Urvi ❤️</title>
+    <title>For Urvi ❤️</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #ff9a9e, #fad0c4);
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
 
-<style>
-body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(135deg, #ff9ecf, #ff6fa5);
-    overflow: hidden;
-    transition: 1s ease;
-}
+        h1 {
+            margin-top: 50px;
+            font-size: 28px;
+        }
 
-.container {
-    text-align: center;
-    background: rgba(255,255,255,0.95);
-    padding: 30px;
-    border-radius: 25px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-    width: 90%;
-    max-width: 420px;
-    position: relative;
-    transition: 1s ease;
-}
+        img {
+            width: 250px;
+            border-radius: 15px;
+            margin-top: 20px;
+        }
 
-h1 {
-    font-family: 'Pacifico', cursive;
-    font-size: 24px;
-    color: #ff4f87;
-    transition: 1s ease;
-}
+        .buttons {
+            margin-top: 30px;
+            position: relative;
+            height: 200px;
+        }
 
-img {
-    width: 220px;
-    border-radius: 20px;
-    margin: 15px 0;
-    transition: 1s ease;
-}
+        button {
+            padding: 12px 25px;
+            font-size: 18px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            margin: 10px;
+        }
 
-.zoom {
-    transform: scale(1.1);
-}
+        #yesBtn {
+            background-color: #ff4d6d;
+            color: white;
+        }
 
-.buttons {
-    position: relative;
-    height: 160px;
-}
+        #noBtn {
+            background-color: #555;
+            color: white;
+            position: absolute;
+        }
 
-button {
-    padding: 12px 22px;
-    font-size: 16px;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    position: absolute;
-    transition: 0.3s ease;
-}
-
-#yesBtn {
-    background: #ff4f87;
-    color: white;
-    left: 20%;
-}
-
-#noBtn {
-    background: #ddd;
-    right: 20%;
-}
-
-.blur {
-    filter: blur(8px);
-}
-
-.heart {
-    position: fixed;
-    font-size: 22px;
-    animation: float 3s linear infinite;
-}
-
-@keyframes float {
-    0% { transform: translateY(100vh); opacity: 1; }
-    100% { transform: translateY(-10vh); opacity: 0; }
-}
-
-.final-message {
-    position: fixed;
-    text-align: center;
-    font-family: 'Pacifico', cursive;
-    font-size: 24px;
-    color: white;
-    opacity: 0;
-    transition: 2s ease;
-    padding: 20px;
-}
-</style>
+        #finalMessage {
+            display: none;
+            font-size: 20px;
+            margin-top: 30px;
+            padding: 20px;
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="container" id="mainContainer">
-    <h1 id="title">Urvi Adhikari 🥺❤️<br>Will You Be My Valentine?</h1>
+    <h1>Urvi Adhikari ❤️</h1>
 
-    <img src="us.jpg" id="photo">
+    <img src="us.jpg">
+
+    <h2>Will you stay with me forever? 💖</h2>
 
     <div class="buttons">
-        <button id="yesBtn">Yes 💖</button>
-        <button id="noBtn">No 💔</button>
+        <button id="yesBtn">Yes 💘</button>
+        <button id="noBtn">No 🙈</button>
     </div>
-</div>
 
-<audio id="music" src="ishq-bulaava.mp3"></audio>
+    <div id="finalMessage">
+        You are the best thing that ever happened to me.  
+        I am so happy and grateful that in this short time we got so close.  
+        You mean more to me than you know ❤️  
+        Ishq Bulava playing just for you 🎶
+    </div>
 
-<div class="final-message" id="finalMessage">
-    Urvi ❤️<br><br>
-    You are the best thing that has happened to me.<br>
-    In such a short time, we’ve grown so close,<br>
-    and I’m genuinely happy and grateful for you.<br><br>
-    I can’t wait to create beautiful memories together.<br>
-    My Valentine. Always. 💖✨
-</div>
+    <audio id="music" src="ishq-bulaava.mp3"></audio>
 
-<script>
-const noBtn = document.getElementById("noBtn");
-const yesBtn = document.getElementById("yesBtn");
-const music = document.getElementById("music");
-const container = document.getElementById("mainContainer");
-const photo = document.getElementById("photo");
-const title = document.getElementById("title");
-const finalMessage = document.getElementById("finalMessage");
+    <script>
+        const yesBtn = document.getElementById("yesBtn");
+        const noBtn = document.getElementById("noBtn");
+        const finalMessage = document.getElementById("finalMessage");
+        const music = document.getElementById("music");
 
-let scale = 1;
+        yesBtn.addEventListener("click", function () {
+            finalMessage.style.display = "block";
+            music.play();
+        });
 
-noBtn.addEventListener("mouseover", moveButton);
-noBtn.addEventListener("click", moveButton);
-noBtn.addEventListener("touchstart", moveButton);
+        noBtn.addEventListener("click", function () {
+            const randomX = Math.floor(Math.random() * 250);
+            const randomY = Math.floor(Math.random() * 150);
 
-function moveButton() {
-    const maxX = window.innerWidth - noBtn.offsetWidth;
-    const maxY = window.innerHeight - noBtn.offsetHeight;
-
-    const randomX = Math.floor(Math.random() * maxX);
-    const randomY = Math.floor(Math.random() * maxY);
-
-    noBtn.style.left = randomX + "px";
-    noBtn.style.top = randomY + "px";
-
-    scale -= 0.05;
-    noBtn.style.transform = `scale(${scale})`;
-}
-
-yesBtn.addEventListener("click", () => {
-
-    music.volume = 0;
-    music.play();
-
-    let fade = setInterval(() => {
-        if (music.volume < 1) {
-            music.volume += 0.05;
-        } else {
-            clearInterval(fade);
-        }
-    }, 200);
-
-    container.classList.add("blur");
-    photo.classList.add("zoom");
-
-    title.innerHTML = "YAY URVI 😭❤️<br>You just made me the happiest person alive!";
-
-    createHearts();
-
-    setTimeout(() => {
-        finalMessage.style.opacity = 1;
-    }, 2000);
-});
-
-function createHearts() {
-    for (let i = 0; i < 50; i++) {
-        let heart = document.createElement("div");
-        heart.className = "heart";
-        heart.innerHTML = "❤️";
-        heart.style.left = Math.random() * 100 + "vw";
-        heart.style.animationDuration = (Math.random() * 2 + 2) + "s";
-        document.body.appendChild(heart);
-
-        setTimeout(() => heart.remove(), 3000);
-    }
-}
-</script>
+            noBtn.style.left = randomX + "px";
+            noBtn.style.top = randomY + "px";
+        });
+    </script>
 
 </body>
 </html>
