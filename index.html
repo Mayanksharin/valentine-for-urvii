@@ -1,127 +1,156 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>For Urvi ❤️</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Urvi ❤️</title>
 
-    <style>
-        body {
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-            text-align: center;
-            overflow: hidden;
-        }
+<style>
+body {
+    margin:0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg,#ff9ecf,#ffc3e6);
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    overflow:hidden;
+}
 
-        h1 {
-            font-size: 30px;
-            color: #d63384;
-        }
+.section {
+    position:absolute;
+    width:90%;
+    max-width:400px;
+    transition:0.8s ease;
+}
 
-        h2 {
-            color: #d63384;
-        }
+.hidden { opacity:0; pointer-events:none; transform:scale(0.9); }
+.visible { opacity:1; }
 
-        img {
-            width: 260px;
-            border-radius: 20px;
-            margin: 20px 0;
-        }
+h1 { color:#d63384; }
+h2 { color:#c2185b; }
 
-        .buttons {
-            margin-top: 20px;
-            position: relative;
-            width: 300px;
-            height: 120px;
-        }
+button {
+    padding:12px 25px;
+    border:none;
+    border-radius:25px;
+    font-size:16px;
+    cursor:pointer;
+    margin:10px;
+    transition:0.3s;
+}
 
-        button {
-            padding: 12px 25px;
-            font-size: 18px;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: 0.2s ease;
-        }
+.primary { background:#ff4d6d; color:white; }
+.secondary { background:#444; color:white; position:absolute; }
 
-        #yesBtn {
-            background: #ff4d6d;
-            color: white;
-            position: absolute;
-            left: 30px;
-            top: 40px;
-        }
+img {
+    width:250px;
+    border-radius:20px;
+    margin:15px 0;
+}
 
-        #noBtn {
-            background: #555;
-            color: white;
-            position: absolute;
-            left: 170px;
-            top: 40px;
-        }
+.heart {
+    position:fixed;
+    color:red;
+    animation:float 3s linear infinite;
+}
 
-        #finalMessage {
-            display: none;
-            margin-top: 20px;
-            font-size: 18px;
-            color: #b30059;
-            max-width: 350px;
-        }
-    </style>
+@keyframes float {
+    from { transform:translateY(100vh); opacity:1; }
+    to { transform:translateY(-10vh); opacity:0; }
+}
+</style>
 </head>
 
 <body>
 
-    <h1>Urvi Adhikari 🥺❤️</h1>
+<!-- PAGE 1 -->
+<div class="section visible" id="page1">
+    <h1>Hi Urvi ❤️</h1>
+    <h2>I made something for you...</h2>
+    <button class="primary" onclick="nextPage(1)">Open It 💌</button>
+</div>
 
-    <h2>Will You Be My Valentine?</h2>
-
+<!-- PAGE 2 -->
+<div class="section hidden" id="page2">
+    <h1>You & Me 🥺</h1>
     <img src="us.jpg">
+    <p>
+        In such a short time,<br>
+        we’ve grown so close.<br><br>
+        You make my days brighter,<br>
+        my heart calmer,<br>
+        and my world happier.
+    </p>
+    <button class="primary" onclick="nextPage(2)">One More Thing...</button>
+</div>
 
-    <div class="buttons">
-        <button id="yesBtn">Yes ✨</button>
-        <button id="noBtn">No 💔</button>
+<!-- PAGE 3 -->
+<div class="section hidden" id="page3">
+    <h1>Urvi Adhikari ❤️</h1>
+    <h2>Will You Be My Valentine?</h2>
+    <div style="position:relative;height:120px;">
+        <button class="primary" id="yesBtn">Yes 💖</button>
+        <button class="secondary" id="noBtn">No 💔</button>
     </div>
+</div>
 
-    <div id="finalMessage">
-        You are the best thing that ever happened to me.<br><br>
-        In such a short time, we’ve grown so close and I’m truly grateful for you.<br><br>
-        I feel lucky every day because of you ❤️<br><br>
-        Ishq Bulava playing just for you 🎶
-    </div>
+<!-- PAGE 4 -->
+<div class="section hidden" id="page4">
+    <h1>YOU SAID YES 😭❤️</h1>
+    <h2>
+        You are the best thing that has ever happened to me.<br><br>
+        I’m so grateful we found each other.<br><br>
+        I can’t wait to create beautiful memories together.<br><br>
+        My Valentine. Always. 💘
+    </h2>
+</div>
 
-    <audio id="music" src="ishq-bulaava.mp3"></audio>
+<audio id="music" src="ishq-bulaava.mp3"></audio>
 
-    <script>
-        const yesBtn = document.getElementById("yesBtn");
-        const noBtn = document.getElementById("noBtn");
-        const finalMessage = document.getElementById("finalMessage");
-        const music = document.getElementById("music");
+<script>
 
-        yesBtn.addEventListener("click", function() {
-            finalMessage.style.display = "block";
-            music.play();
-        });
+function nextPage(current){
+    document.getElementById("page"+current).classList.remove("visible");
+    document.getElementById("page"+current).classList.add("hidden");
+    document.getElementById("page"+(current+1)).classList.remove("hidden");
+    document.getElementById("page"+(current+1)).classList.add("visible");
+}
 
-        function moveNoButton() {
-            const maxX = 220;
-            const maxY = 70;
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const music = document.getElementById("music");
 
-            const randomX = Math.random() * maxX;
-            const randomY = Math.random() * maxY;
+yesBtn.onclick = function(){
+    nextPage(3);
+    music.play();
+    createHearts();
+}
 
-            noBtn.style.left = randomX + "px";
-            noBtn.style.top = randomY + "px";
-        }
+function moveNo(){
+    const maxX = 200;
+    const maxY = 80;
+    noBtn.style.left = Math.random()*maxX+"px";
+    noBtn.style.top = Math.random()*maxY+"px";
+}
 
-        noBtn.addEventListener("mouseover", moveNoButton);
-        noBtn.addEventListener("click", moveNoButton);
-    </script>
+noBtn.addEventListener("mouseover",moveNo);
+noBtn.addEventListener("click",moveNo);
+
+function createHearts(){
+    for(let i=0;i<40;i++){
+        let heart=document.createElement("div");
+        heart.className="heart";
+        heart.innerHTML="❤️";
+        heart.style.left=Math.random()*100+"vw";
+        heart.style.fontSize=(Math.random()*20+15)+"px";
+        heart.style.animationDuration=(Math.random()*2+2)+"s";
+        document.body.appendChild(heart);
+        setTimeout(()=>heart.remove(),3000);
+    }
+}
+
+</script>
 
 </body>
 </html>
